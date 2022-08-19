@@ -5,6 +5,7 @@ export const GET_ORDER_BY_NAME="GET_ORDER_BY_NAME"
 export const GET_ORDER_BY_SCORE="GET_ORDER_BY_SCORE"
 export const GET_FILTER_BY_DIETS="GET_FILTER_BY_DIETS"
 export const GET_NAME_RECIPES="GET_NAME_RECIPES"
+export const GET_DIETS="GET_DIETS"
 
 export function getRecipes(){
     return async function(dispatch){
@@ -13,6 +14,22 @@ export function getRecipes(){
             type:"GET_RECIPES",
             payload: json.data
         })
+    }
+}
+export function getDiets(){
+    return async function(dispatch){
+        let json= await axios.get("http://localhost:3001/diets")
+        return dispatch({
+            type:"GET_DIETS",
+            payload:json.data
+        })
+    }
+}
+export function postRecipes(payload){
+    return async function (dispatch){
+        const json= await axios.get("http://localhost:3001/recipes", payload)
+        console.log(json)
+        return json;
     }
 }
 export function getFilterByDiets(payload){

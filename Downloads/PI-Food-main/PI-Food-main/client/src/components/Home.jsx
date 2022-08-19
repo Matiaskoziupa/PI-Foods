@@ -9,14 +9,14 @@ import SearchBar from "./SearchBar";
 
 export default function Home(){
     const dispatch=useDispatch();
-    const allRecipe=useSelector((state)=>state.recipes)
+    const allRecipes=useSelector((state)=>state.recipes)
     let [loading,setLoading]= useState(true);
-    console.log(allRecipe)
+    console.log(allRecipes)
     const[currentPage, setCurrentPage]=useState(1);
     const[recipesPerPage, setRecipesPerPage]=useState(9);
     const indexOfLastRecipe=currentPage*recipesPerPage;
     const indexOfFirstRecipe=indexOfLastRecipe-recipesPerPage;
-    const currentRecipes=allRecipe?.slice(indexOfFirstRecipe, indexOfLastRecipe)
+    const currentRecipes=allRecipes?.slice(indexOfFirstRecipe, indexOfLastRecipe)
 
     const paginado= (pageNumber)=> {
         setCurrentPage(pageNumber)
@@ -101,7 +101,7 @@ return(
             </div>
             <Paginado
             recipesPerPage={recipesPerPage}
-            allRecipe={allRecipe?.length}
+            allRecipes={allRecipes?.length}
             paginado={paginado}
             />
         </div>

@@ -1,8 +1,9 @@
-import { GET_FILTER_CREATED, GET_RECIPES, GET_ORDER_BY_NAME, GET_ORDER_BY_SCORE, GET_FILTER_BY_DIETS, GET_NAME_RECIPES } from "../actions";
+import { GET_FILTER_CREATED, GET_RECIPES, GET_ORDER_BY_NAME, GET_ORDER_BY_SCORE, GET_FILTER_BY_DIETS, GET_NAME_RECIPES, GET_DIETS } from "../actions";
 
 const initialState={
     recipes:[],
-    allRecipes:[]
+    allRecipes:[],
+    diets:[],
 }
 
 function rootReducer(state=initialState, action){
@@ -10,7 +11,8 @@ function rootReducer(state=initialState, action){
         case GET_RECIPES:
             return {
                 ...state,
-                recipes:action.payload
+                recipes:action.payload,
+                allRecipes:action.payload
             }
            
                 case GET_ORDER_BY_SCORE:
@@ -64,13 +66,15 @@ function rootReducer(state=initialState, action){
                             }
                             case GET_FILTER_CREATED:
                                 const allRecipes2=state.allRecipes;
-                                const filter= action.payload==="All" ? allRecipes2?.filter(s=>s.createdInDb) : allRecipes2?.filter(s=>!s.createdInDb)
+                                const filter= action.payload==="created" ? allRecipes2?.filter(s=>s.createdInDb) : allRecipes2?.filter(s=>!s.createdInDb)
+                                console.log(filter)
                                 return{
                                     ...state,
-                                    recipes: action.payload==="created" ? state.allRecipes : filter
+                                    recipes: action.payload==="All" ? state.allRecipes : filter
+                                    
                                 } 
                             case GET_FILTER_BY_DIETS:
-                                const recipesToFilterByDiets = state.allRecipes;
+                                const recipesToFilterByDiets = state.recipes;
                                 const dietsFilter = action.payload === "All" ?
                                 recipesToFilterByDiets :
                                 recipesToFilterByDiets&&recipesToFilterByDiets.filter(s => s.type.includes(action.payload))
@@ -83,6 +87,16 @@ function rootReducer(state=initialState, action){
                                         ...state,
                                         recipes:action.payload.error?[{Error:"No videogames Found"}] : action.payload,
                                     }
+                                    case "POST_RECIPES":
+                                        return{
+                                            ...state,
+                                        }
+                                        case GET_DIETS:
+                                            return{
+                                                ...state,
+                                                diets:action.payload
+                                            }
+
             default:
                 return{
                     state
