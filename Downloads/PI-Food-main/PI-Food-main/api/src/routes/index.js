@@ -19,7 +19,7 @@ async function getApiData(){
         const api= await axios.get(`https://api.spoonacular.com/recipes/complexSearch/?apiKey=${KEY}&addRecipeInformation=true&number=100`);
         const apiData= api.data.results.map((s)=>{
             return {
-            name:s.title,
+            name:s.title.toLowerCase(),
             id:s.id.toString(),
             image:s.image,
             type:s.diets,
@@ -91,9 +91,9 @@ router.get("/recipes/:id", async (req, res)=>{
     }
 })
 router.post("/recipes", async (req, res)=>{
-    // const { name, summary, healthScore, steps, type, image, dishTypes } = req.body;
+    const { name, summary, healthScore, steps, type, image, dishTypes } = req.body;
     try {
-        const { name, summary, healthScore, steps, type, image, dishTypes } = req.body;
+        // const { name, summary, healthScore, steps, type, image, dishTypes } = req.body;
         const nuevaReceta = await Recipe.create({
             name,
             summary,

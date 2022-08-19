@@ -2,21 +2,63 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getRecipes } from "../actions";
+import { getRecipes,getFilterCreated,getOrderByName, getOrderByScore,getFilterByDiets } from "../actions";
 import Card from "./Card";
+import Paginado from "./Paginated";
+import SearchBar from "./SearchBar";
 
 export default function Home(){
     const dispatch=useDispatch();
-    const allRecipes=useSelector((state)=>state.recipes)
+    const allRecipe=useSelector((state)=>state.recipes)
+    let [loading,setLoading]= useState(true);
+    console.log(allRecipe)
+    const[currentPage, setCurrentPage]=useState(1);
+    const[recipesPerPage, setRecipesPerPage]=useState(9);
+    const indexOfLastRecipe=currentPage*recipesPerPage;
+    const indexOfFirstRecipe=indexOfLastRecipe-recipesPerPage;
+    const currentRecipes=allRecipe?.slice(indexOfFirstRecipe, indexOfLastRecipe)
 
+    const paginado= (pageNumber)=> {
+        setCurrentPage(pageNumber)
+    }
+    if(currentRecipes?.length > 0 && loading){
+        setLoading(false);
+    }
     useEffect(()=>{
         dispatch(getRecipes());
-    }, [])
+    }, [dispatch])
+
+    const [orden, setOrden]= useState("")
 
     function handleClick(e){
         e.preventDefault();
-        dispatch(getRecipes());
+        window.location.reload()
     }
+    function handleFilterCreated(e){
+        e.preventDefault();
+        dispatch(getFilterCreated(e.target.value));
+        setCurrentPage(1)
+        setRecipesPerPage(15)
+    }
+    function handleOrderByName(e){
+        e.preventDefault();
+        dispatch(getOrderByName(e.target.value));
+        setCurrentPage(1)
+        setOrden(`Ordenado ${e.target.value}`)
+    }
+    function handleOrderByScore(e){
+        e.preventDefault();
+        dispatch(getOrderByScore(e.target.value))
+        setOrden(`Ordenado ${e.target.value}`)
+        setCurrentPage(1)
+    }
+    function handleFilterByDiets(e){
+        e.preventDefault();
+        dispatch(getFilterByDiets(e.target.value))
+        setCurrentPage(1)
+        setOrden(`Ordenado ${e.target.value}`)
+    }
+    
 
 return(
 
@@ -24,22 +66,26 @@ return(
         <Link to="/recipes"><button>Create recipe</button></Link>
         <div>
             <h1>Foods</h1>
+            <SearchBar
+            setCurrentPage={setCurrentPage}
+            setRecipesPerPage={setRecipesPerPage}
+            />
             <div>
                 <button onClick={(e)=>handleClick(e)}>Reload all recipes</button>
-                <select>
+                <select onChange={(e)=>handleFilterCreated(e)}>
                     <option value="All">Sort created-all</option>
                     <option value="alpha"> All</option>
                     <option value="created"> created</option>
                 </select>
-                <select>
+                <select onChange={(e)=>handleOrderByName(e)}>
                     <option value="asc">A-Z</option>
                     <option value="desc">Z-A</option>
                 </select>
-                <select>
-                    <option value="mas">High score</option>
-                    <option value="menos">Less score</option>
+                <select onChange={(e)=>handleOrderByScore(e)}>
+                    <option value="mas">Lowest to highest</option>
+                    <option value="menos">Highest to lowest</option>
                 </select>
-                <select>
+                <select onChange={(e)=>handleFilterByDiets(e)}>
                     <option value="All">All</option>
                     <option value="gluten free">Gluten free</option>
                     <option value="dairy free">Dairy free</option>
@@ -53,9 +99,14 @@ return(
                     <option value="fodmap friendly">Fodmap friendly</option>
                 </select>
             </div>
+            <Paginado
+            recipesPerPage={recipesPerPage}
+            allRecipe={allRecipe?.length}
+            paginado={paginado}
+            />
         </div>
         <div className="CONTAINER">
-            {allRecipes&&allRecipes.map((s)=>{
+            {currentRecipes&&currentRecipes.map((s)=>{
                 return(
                    
                         <Link key={s.id} to={`/recipes/${s.id}`}>
@@ -64,6 +115,7 @@ return(
                     
                 );
             })}
+            
             </div>
     </div>
 )
