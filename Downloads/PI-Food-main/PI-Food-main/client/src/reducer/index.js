@@ -85,7 +85,7 @@ function rootReducer(state=initialState, action){
                                 case GET_NAME_RECIPES:
                                     return{
                                         ...state,
-                                        recipes:action.payload.error?[{Error:"No videogames Found"}] : action.payload,
+                                        recipes:action.payload.error?[{Error:"No recipes Found"}] : action.payload,
                                     }
                                     case "POST_RECIPES":
                                         return{

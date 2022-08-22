@@ -27,7 +27,7 @@ export function getDiets(){
 }
 export function postRecipes(payload){
     return async function (dispatch){
-        const json= await axios.get("http://localhost:3001/recipes", payload)
+        const json= await axios.post("http://localhost:3001/recipes", payload)
         console.log(json)
         return json;
     }
@@ -65,7 +65,7 @@ export function getNameRecipes(payload){
                 payload:json.data
             })
         } catch(error){
-            window.alert("You have to enter a word");
+            window.alert(error.data);
         }
     }
 }

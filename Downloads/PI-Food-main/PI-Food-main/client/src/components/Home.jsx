@@ -6,7 +6,6 @@ import { getRecipes,getFilterCreated,getOrderByName, getOrderByScore,getFilterBy
 import Card from "./Card";
 import Paginado from "./Paginated";
 import SearchBar from "./SearchBar";
-
 export default function Home(){
     const dispatch=useDispatch();
     const allRecipes=useSelector((state)=>state.recipes)
