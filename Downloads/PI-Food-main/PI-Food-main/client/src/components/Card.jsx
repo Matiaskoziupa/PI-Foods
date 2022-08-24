@@ -12,7 +12,7 @@ export default function Card({name,image,type, diets}){
         <div className="card"> 
             <div className="card_items">
                 <h3>{name}</h3>
-                <h5>{ type&&type.join(" | ")}||{diets&&diets.join(" | ")}</h5>
+                <h5>{ type&&type.join(" | ")} {diets&&diets.join(" | ")}</h5>
                 <img className="img" src= {image} alt="Not found" width="200px" height="250px" ></img>
                 
             </div> 

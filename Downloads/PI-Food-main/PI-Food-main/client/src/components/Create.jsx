@@ -1,124 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import { postRecipes, getDiets } from "../actions";
-
-// export default function Create(){
-//     const dispatch=useDispatch()
-//     const history= useHistory()
-//     const diets= useSelector((state)=>state.diets&&diets)
-//     console.log(diets)
-
-//     const[input, setInput]=useState({
-//         name:"",
-//         summary:"",
-        // healthScore:"",
-//         steps:"",
-//         image:"",
-//         diets:[]
-//     })
-//     function handleChange(e){
-//         setInput({
-//             ...input,
-//             [e.target.name]: e.target.value
-//         })
-//         console.log(input)
-//     }
-//     function handleSelect(e){
-//         setInput({
-//             ...input,
-//             diets:[...input.diets, e.target.value]
-//         })
-//     }
-//     function handleSubmit(e){
-//         e.preventDefault();
-//         dispatch(postRecipes(input))
-//         alert("Recipe create")
-//         setInput({
-//             name:"",
-//             summary:"",
-//             healthScore:"",
-//             steps:"",
-//             image:"",
-//             diets:[]
-//         })
-//         history.push("/home")
-//     }
-
-//     useEffect(()=>{
-//         dispatch(getDiets());
-//     }, [])
-
-//     return(
-//         <form onClick={(e)=>handleSubmit(e)}>
-//             <div>
-//                 <div>
-//                 <h1>Create videogame</h1>
-//                 <button>
-//                     <Link to="/home">Back</Link>
-//                 </button>
-//             </div>
-//         <div>
-//             <label>Name:</label>
-//             <input
-//             type="text"
-//             value={input.name}
-//             name="name"
-//             onChange={(e)=>handleChange(e)}
-//             />
-//         </div>
-//         <div>
-//             <label>Summary:</label>
-//             <input
-//             type="text"
-//             value={input.summary}
-//             name="summary"
-//             onChange={(e)=>handleChange(e)}
-//             />
-//         </div>
-//         <div>
-//             <label>Health score:</label>
-//             <input
-//             type="number"
-//             value={input.healthScore}
-//             name="healthScore"
-//             onChange={(e)=>handleChange(e)}
-//             />
-//         </div>
-//         <div>
-//             <label>Steps:</label>
-//             <input
-//             type="text"
-//             value={input.steps}
-//             name="steps"
-//             onChange={(e)=>handleChange(e)}
-//             />
-//         </div>
-//         <div>
-//             <label>Image:</label>
-//             <input
-//             type="text"
-//             value={input.image}
-//             name="image"
-//             onChange={(e)=>handleChange(e)}
-//             />
-//         </div>
-//         <select onChange={(e)=>handleSelect(e)}>
-//             {diets&&diets.map((s)=>(
-//                 <option value={s.name}>{s.name}</option>
-//             ))} 
-//         </select>
-//         </div>
-//         <ul><li>{input.diets&&diets.map(s=>s + ", ")}</li></ul> 
-//         </form>
-     
-//     )
-// }
-export default function Create(){
+import { useDispatch, useSelector } from "react-redux";
 
 
-const validate = () =>{
+function validate(input){
     let errors = {};
 
     if(input.name === ""){
@@ -136,19 +23,19 @@ const validate = () =>{
     } else if(input.score < 0 || input.score > 100){
         errors.score = 'Maximum up to 100'
 
-    }else if(input.healthyScore < 0 || input.healthyScore> 100 ){
+    }else if(input.healthScore < 0 || input.healthScore> 100 ){
         errors.healthyScore = 'Maximum up to 100'
 
     }else if(input.dishTypes === ""){
         errors.dishTypes = "required field"
 
-    }else if(input.type.length === 0){
+    }else if(input.diets.length === 0){
         errors.type = "it has to be a different diet"
 
     }else if(!input.score){
         errors.score = "required field"
-    }else if(!input.healthyScore){
-        errors.healthyScore ="required field"
+    }else if(!input.healthScore){
+        errors.healthScore ="required field"
     }else if (!input.image.includes("https")) {
         errors.image = 'Please insert an image type URL'
     }else if(!input.steps){
@@ -162,19 +49,15 @@ const validate = () =>{
     return errors;
 }
 
+export default function Create(){
+    const dispatch=useDispatch()
+    const history=useHistory()
+    const diets=useSelector((state)=>state.diets)
+    const[errors, setErrors]=useState({});
+    // console.log(genres)
 
-
-
-
-// Validates 
-
-    const dispatch = useDispatch()
-     const diet = useSelector(state=> state.diets)
-    //  console.log(diet)
-     let navigate = useHistory();
-    const [errors, setErrors] = useState({})
-    const [input,setInput]=useState({
-        name: '',
+    const[input, setInput]=useState({
+        name:"",
         summary: '',
         score: '',
         healthScore: '',
@@ -184,241 +67,163 @@ const validate = () =>{
         diets: [],
     })
 
-    const handleChange = (e)=>{
-
+    function handleChange(e){
         setInput({
             ...input,
-            [e.target.name]:e.target.value
+            [e.target.name] : e.target.value
         })
         setErrors(validate({
             ...input,
-            [e.target.value]:e.target.value
+            [e.target.name] : e.target.value
         }))
-        //  console.log(input)
+        console.log(input)
     }
-
-    const handleSelect = (e)=>{
-
-        if(input.diets.includes(e.target.value)){
-            return 'Diet Type exists'
-        }else{
-            setInput({
-                ...input,
-                type:[...input.diets,e.target.value]
-            })
-        }
-        setErrors(validate({
-            ...input,
-            [e.target.value]:e.target.value
-        }))
-        //  console.log(input)
-    }
-
-
-    const handleDelete= (el)=>{
+    function handleSelect(e){
+        const diets= input.diets.includes(e.target.value) ?
+        alert("Equal genres cannot be added"):
         setInput({
             ...input,
-            diets: input.diets.filter(e => e !== el)
+            diets:[...input.diets, e.target.value]
         })
-    } 
+    }
 
-    const handleSubmit = (e)=>{
+    function handleSubmit(e){
+        e.preventDefault();
+        console.log(input)
+        dispatch(postRecipes(input))
+        alert("Videogame created")
+        setInput({
+            name:"",
+            summary: '',
+            score: '',
+            healthScore: '',
+            steps: '',
+            image:'',
+            dishTypes:'',
+            diets: [],     
+        })
+        history.push("/home")
+    }
+   
+
+    useEffect(()=>{
+        dispatch(getDiets())
+    }, []);
+
+  
+    function handleDeleteDiets(e){
         e.preventDefault()
-        setErrors(validate(input));
-        const errorSave = validate(input);
-        if(Object.values(errorSave).length !== 0){
-          alert('The recipe is not created, fill in the required fields!')
-        }else{
-            dispatch(postRecipes(input))
-            alert("recipe created successfully")
-            setInput({
-                name: '',
-                summary: '',
-                score: '',
-                healthScore: '',
-                steps: '',
-                image:'',
-                dishTypes:'',
-                diets: [],
-            })
-            // history.push('/home')
-        }
-          
-        
-                
-      
+        setInput({
+            ...input,
+            diets: [] 
+        });
+        console.log(input)
     }
-
-    useEffect(() => {
-      dispatch(getDiets())
-    }, [dispatch])
     
 
-  return (
-    <div >
-        <Link to="/home" >
-            <span>back</span>        
-        </Link>
-
-        <form action="" onSubmit={(e)=> handleSubmit (e)}>
-
-                <label htmlFor="">URL Img</label>
-            <div>
+    return(
+        <div className="createTop">
+            
+            <Link to="/home"><button className="btn3">Back</button></Link>
+            <h1>Create your videogame</h1>
+            <form className="Createcontainer" onSubmit={(e)=>handleSubmit(e)}>
+                <div>
+                    <label>Name:</label>
                     <input
                     type="text"
-                    value={input.image}
-                    name='image'
-                    onChange={handleChange}
+                    value= {input.name}
+                    name= "name"
+                    onChange={(e)=>handleChange(e)}
                     />
-                    {
-                        errors.image && (
-                            <p>{errors.image}</p>
-                        )
-                    }
-                    
-            </div>
-
-                <label htmlFor="">name</label>
-            <div>
-                    <input
-                    type="text"
-                    value={input.name}
-                    name='name'
-                    onChange={handleChange}
-                    />
-                    {
-                        errors.name && (
-                            <p>{errors.name}</p>
-                        )
-                    }
-            </div>
-
-                <label htmlFor="">summary</label>
-            <div>
+                    {errors.name && (
+                        <p>{errors.name}</p>
+                    )}
+                </div>
+                <div>
+                    <label>Summary:</label>
                     <input
                     type="text"
                     value={input.summary}
                     name="summary"
-                    onChange={handleChange}
+                    onChange={(e)=>handleChange(e)}
                     />
-                    {
-                        errors.summary && (
-                            <p>{errors.summary}</p>
-                        )
-                    }
-            </div>
-
-                  <label htmlFor="">dishTypes</label>
-            <div>
-                    <input
-                    type="text"
-                    value={input.dishTypes}
-                    name="dishTypes"
-                    onChange={handleChange}
-                    />
-                     {
-                        errors.dishTypes && (
-                            <p>{errors.dishTypes}</p>
-                        )
-                    } 
-             </div> 
-
-                <label htmlFor="">Score</label>
-            <div>
+                    {errors.summary &&  (
+                        <p>{errors.summary}</p>
+                    )}
+                </div>
+                
+                <div>
+                    <label>Score:</label>
                     <input
                     type="number"
                     value={input.score}
                     name="score"
-                    placeholder='0-100'
-                    min="1"
-                    max="100"
-                    onChange={handleChange}
+                    onChange={(e)=>handleChange(e)}
                     />
-                     {
-                        errors.score && (
-                            <p>{errors.score}</p>
-                        )
-                    }
-            </div>
-
-                <label htmlFor="">HealthyScore</label>
-            <div>
-               
+                    {errors.score &&(
+                        <p>{errors.score}</p>
+                    )}
+                </div>
+                <div>
+                    <label>Health score:</label>
                     <input
                     type="number"
-                    value={input.healthyScore}
-                    name="healthyScore"
-                    placeholder='0-100'
-                    min="1"
-                    max="100"
-                    onChange={handleChange}
+                    value={input.healthScore}
+                    name="healthScore"
+                    onChange={(e)=>handleChange(e)}
                     />
-                      {
-                        errors.healthyScore && (
-                            <p>{errors.healthyScore}</p>
-                        )
-                    }
-            </div>
-
-                <label htmlFor="">Step by Step</label>
-            <div>
-                <textarea onChange={handleChange} type="text" name="steps" value={input.steps}>
-
-                </textarea>
-                    
-                     {
-                        errors.steps && (
-                            <p>{errors.steps}</p>
-                        )
-                    }
-
-            </div>
-            
-
-            <div>
-
-
-                <select  onChange={handleSelect}>
-                    <option value={input.diets} name="type">Diet..</option>
-                     {/* <option name="" value={input.autor}>Autor</option> */}
-                    {
-                        diet?.map(c=> {
-                            return(
-                             
-                                <option key={c.id} value={c.name}>{c.name}</option>
-                                
-                            )
-                        })
-                    }
-                 
-                </select>  
-            
-                    
-                    {
-                        errors.diets && (
-                            <p>{errors.diets}</p>
-                        )
-                    }
-                  
-                   
-
-            </div>
-                    
-            
-
-           <button type='submit' onSubmit={handleSubmit}>Crear</button>
-           
-        </form>
-
-        <div>
-            {input.diets.map((el) => (
-            <div key={el}>
-            <span >{el}</span >
-            <button onClick={() => handleDelete(el)}> x </button>
-            </div>
-        ))}
+                    {errors.healthScore &&(
+                        <p>{errors.healthScore}</p>
+                    )}
+                </div>
+                <div>
+                    <label>Steps:</label>
+                    <input
+                    type="text"
+                    value={input.steps}
+                    name="steps"
+                    onChange={(e)=>handleChange(e)}
+                    />
+                    {errors.steps &&  (
+                        <p>{errors.steps}</p>
+                    )}
+                </div>
+                <div>
+                    <label>Image:</label>
+                    <input
+                    type="text"
+                    value={input.image}
+                    name="image"
+                    onChange={(e)=>handleChange(e)}
+                    />
+                </div>
+                <div>
+                    <label>Dish types:</label>
+                    <input
+                    type="text"
+                    value={input.dishTypes}
+                    name="dishTypes"
+                    onChange={(e)=>handleChange(e)}
+                    />
+                    {errors.dishTypes &&(
+                        <p>{errors.dishTypes}</p>
+                    )}
+                </div>
+               
+                <div>
+                <label >Diets:</label>
+                <select required name="type" onChange={(e)=>handleSelect(e)}>
+                    {diets&&diets.map((s)=>(
+                        <option value={s.name}>{s.name}</option>
+                    ))}
+                </select>
+                </div>
+                <ul><li>{input.diets.map(s=>s + ",")}</li></ul>
+                <button onClick={(e)=>handleDeleteDiets(e)}>X</button>
+                {
+                    input.name.length!==0 &&
+                    <button className="btn4" type="submit" disabled={Object.entries(errors).length===0  ? false   : true}>Create videogame</button>}
+            </form>
         </div>
-
-    </div>
-  )
+    )
 }

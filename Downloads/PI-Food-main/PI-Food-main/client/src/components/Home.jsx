@@ -20,9 +20,7 @@ export default function Home(){
     const paginado= (pageNumber)=> {
         setCurrentPage(pageNumber)
     }
-    if(currentRecipes?.length > 0 && loading){
-        setLoading(false);
-    }
+    
     useEffect(()=>{
         dispatch(getRecipes());
     }, [dispatch])
@@ -37,7 +35,7 @@ export default function Home(){
         e.preventDefault();
         dispatch(getFilterCreated(e.target.value));
         setCurrentPage(1)
-        setRecipesPerPage(15)
+        setRecipesPerPage(9)
     }
     function handleOrderByName(e){
         e.preventDefault();
@@ -108,13 +106,12 @@ return(
             {currentRecipes&&currentRecipes.map((s)=>{
                 return(
                    
-                        <Link key={s.id} to={`/recipes/${s.id}`}>
+                        <Link key={s.id} to={`/recipe/${s.id}`}>
                             <Card name={s.name} image={s.image} type={s.type || s.diets.map(s=>s.name) }/>
                         </Link>
                     
                 );
             })}
-            
             </div>
     </div>
 )

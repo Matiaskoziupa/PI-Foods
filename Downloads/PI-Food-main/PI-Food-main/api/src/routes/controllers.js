@@ -14,6 +14,9 @@ async function getDiets(){
     });
     return await Diet.findAll();
 };
+
+  
+ 
 module.exports={
-    getDiets
+    getDiets,
 }

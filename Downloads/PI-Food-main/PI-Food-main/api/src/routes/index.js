@@ -72,7 +72,7 @@ router.get("/recipes", async (req,res) =>{
         console.log(error)
     }
 })
-router.get("/recipes/:id", async (req, res)=>{
+router.get("/recipe/:id", async (req, res)=>{
     try{
         const id=req.params.id;
         const response= await getAll();
@@ -91,7 +91,7 @@ router.get("/recipes/:id", async (req, res)=>{
     }
 })
 router.post("/recipes", async (req, res)=>{
-    const { name, summary, healthScore, steps, type, image, dishTypes } = req.body;
+    const { name, summary, healthScore, steps, diets, image, dishTypes } = req.body;
     try {
         // const { name, summary, healthScore, steps, type, image, dishTypes } = req.body;
         const nuevaReceta = await Recipe.create({
@@ -103,7 +103,7 @@ router.post("/recipes", async (req, res)=>{
             dishTypes, 
         });
         const dbDiets = await Diet.findAll({
-            where: { name: type },
+            where: { name: diets },
         });
         nuevaReceta.addDiet(dbDiets) 
         // console.log(dbDiets)

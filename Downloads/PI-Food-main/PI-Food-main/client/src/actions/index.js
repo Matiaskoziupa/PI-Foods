@@ -6,6 +6,8 @@ export const GET_ORDER_BY_SCORE="GET_ORDER_BY_SCORE"
 export const GET_FILTER_BY_DIETS="GET_FILTER_BY_DIETS"
 export const GET_NAME_RECIPES="GET_NAME_RECIPES"
 export const GET_DIETS="GET_DIETS"
+export const GET_RECIPES_ID="GET_RECIPES_ID"
+export const GET_CLEAN="GET_CLEAN"
 
 export function getRecipes(){
     return async function(dispatch){
@@ -67,5 +69,24 @@ export function getNameRecipes(payload){
         } catch(error){
             window.alert(error.data);
         }
+    }
+}
+export function getRecipesId(id){
+    return async function(dispatch){
+        try{
+            let json= await axios.get(`http://localhost:3001/recipe/${id}`)
+            return dispatch({
+            type:"GET_RECIPES_ID",
+            payload:json.data
+            })
+        } catch(error){
+            console.log(error)
+        } 
+    }
+}
+export function getClean(payload){
+    return{
+        type:"GET_CLEAN",
+        payload
     }
 }
