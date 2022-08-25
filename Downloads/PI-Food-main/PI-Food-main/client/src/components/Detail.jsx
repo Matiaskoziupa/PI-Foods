@@ -55,7 +55,7 @@ export default function Detail(props){
                 myRecipes&&myRecipes.length>0 ?
                 <div>
                     <h1>{myRecipes[0].name}</h1>
-                    <h3>Types: {!myRecipes[0].createdInDb ? myRecipes[0].type.join(" || ") : myRecipes[0].diets.map(s=>s.name).join(" || ")}</h3>
+                    <h3>Types: {!myRecipes[0].createdInDb ? myRecipes[0].diets.join(" || ") : myRecipes[0].diets.map(s=>s.name).join(" || ")}</h3>
                     <h3>Dish types: {!myRecipes[0].createdInDb ? myRecipes[0].dishTypes.join(" || ") : myRecipes[0].dishTypes}</h3>
                     <h3>Health score: {myRecipes[0].healthScore}</h3>
                     <h5>Steps: {!myRecipes[0].createdInDb ? myRecipes[0].steps.map(s=>s.step) : myRecipes[0].steps}</h5>

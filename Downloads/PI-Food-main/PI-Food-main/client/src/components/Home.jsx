@@ -107,7 +107,7 @@ return(
                 return(
                    
                         <Link key={s.id} to={`/recipe/${s.id}`}>
-                            <Card name={s.name} image={s.image} type={s.type || s.diets.map(s=>s.name) }/>
+                            <Card name={s.name} image={s.image} diets={!s.createdInDb? s.diets : s.diets?.map(s =>s.name)}/>
                         </Link>
                     
                 );

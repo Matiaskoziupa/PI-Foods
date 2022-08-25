@@ -22,7 +22,7 @@ async function getApiData(){
             name:s.title.toLowerCase(),
             id:s.id.toString(),
             image:s.image,
-            type:s.diets,
+            diets:s.diets,
             summary:s.summary,
             dishTypes: s.dishTypes,
             healthScore:s.healthScore,
@@ -40,14 +40,22 @@ async function getApiData(){
     }
 }
 async function getDbData(){
-    const db=await Recipe.findAll({
-        include:{
-            model:Diet,
-            attributes:["name"],
-        },
-    });
-    return db;
-}
+    try {
+        const dbRecipes = await Recipe.findAll({
+            include: {
+                model: Diet,
+        attributes: ['name'],
+        through: {
+            attributes: []
+                },
+                row: true
+        }
+        });
+        return dbRecipes;
+    } catch (error) {
+        console.error(error)
+    }
+};
 async function getAll(){
     const api= await getApiData();
     const db= await getDbData();
@@ -103,7 +111,7 @@ router.post("/recipes", async (req, res)=>{
             dishTypes, 
         });
         const dbDiets = await Diet.findAll({
-            where: { name: diets },
+            where: { name:diets },
         });
         nuevaReceta.addDiet(dbDiets) 
         // console.log(dbDiets)

@@ -30,7 +30,7 @@ function validate(input){
         errors.dishTypes = "required field"
 
     }else if(input.diets.length === 0){
-        errors.type = "it has to be a different diet"
+        errors.diets = "it has to be a different diet"
 
     }else if(!input.score){
         errors.score = "required field"
