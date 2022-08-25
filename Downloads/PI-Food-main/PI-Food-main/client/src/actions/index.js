@@ -67,7 +67,7 @@ export function getNameRecipes(payload){
                 payload:json.data
             })
         } catch(error){
-            window.alert(error.data);
+            window.alert(error.data)
         }
     }
 }

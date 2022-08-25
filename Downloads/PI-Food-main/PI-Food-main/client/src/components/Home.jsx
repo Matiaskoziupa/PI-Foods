@@ -6,6 +6,8 @@ import { getRecipes,getFilterCreated,getOrderByName, getOrderByScore,getFilterBy
 import Card from "./Card";
 import Paginado from "./Paginated";
 import SearchBar from "./SearchBar";
+import "./Home.css";
+
 export default function Home(){
     const dispatch=useDispatch();
     const allRecipes=useSelector((state)=>state.recipes)
@@ -59,30 +61,30 @@ export default function Home(){
 
 return(
 
-    <div>
-        <Link to="/recipes"><button>Create recipe</button></Link>
-        <div>
-            <h1>Foods</h1>
+    <div className="options1">
+        <Link to="/recipes"><button className="btn2">Create recipe</button></Link>
+        <div >
+            <h1 className="titles">Foods</h1>
             <SearchBar
             setCurrentPage={setCurrentPage}
             setRecipesPerPage={setRecipesPerPage}
             />
-            <div>
-                <button onClick={(e)=>handleClick(e)}>Reload all recipes</button>
-                <select onChange={(e)=>handleFilterCreated(e)}>
+            <div className="options1">
+                <button className="btn2reload" onClick={(e)=>handleClick(e)}>Reload all recipes</button>
+                <select className="select" onChange={(e)=>handleFilterCreated(e)}>
                     <option value="All">Sort created-all</option>
                     <option value="alpha"> All</option>
                     <option value="created"> created</option>
                 </select>
-                <select onChange={(e)=>handleOrderByName(e)}>
+                <select className="select" onChange={(e)=>handleOrderByName(e)}>
                     <option value="asc">A-Z</option>
                     <option value="desc">Z-A</option>
                 </select>
-                <select onChange={(e)=>handleOrderByScore(e)}>
+                <select className="select" onChange={(e)=>handleOrderByScore(e)}>
                     <option value="mas">Lowest to highest</option>
                     <option value="menos">Highest to lowest</option>
                 </select>
-                <select onChange={(e)=>handleFilterByDiets(e)}>
+                <select className="select" onChange={(e)=>handleFilterByDiets(e)}>
                     <option value="All">All</option>
                     <option value="gluten free">Gluten free</option>
                     <option value="dairy free">Dairy free</option>

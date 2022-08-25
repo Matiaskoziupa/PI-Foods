@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getNameRecipes } from "../actions";
 
-export default function SearchBar({setCurrentPage, setRecipesPerPage}){
+export default function SearchBar({setCurrentPage, setRecipesPerPages}){
     const dispatch=useDispatch()
     const [name, setName]=useState("")
 
@@ -14,7 +14,7 @@ export default function SearchBar({setCurrentPage, setRecipesPerPage}){
     function handleSubmit(e){
         e.preventDefault();
         if(name.length!==0){
-            dispatch(getNameRecipes(name))
+            dispatch(getNameRecipes(name.toLowerCase()))
         } else {
             alert("Enter a word before searching...")
         }
@@ -24,13 +24,13 @@ export default function SearchBar({setCurrentPage, setRecipesPerPage}){
     }
 
     return(
-        <div>
-            <input
+        <div className="searchInputCONT">
+            <input className="searchInput"
             type="text"
             placeholder="Search..."
             onChange={(e)=>handleInputChange(e)}
             />
-            <button type="submit" onClick={(e)=>handleSubmit(e)}>Search</button>
+            <button className="btn2" type="submit" onClick={(e)=>handleSubmit(e)}>Search</button>
         </div>
     )
 

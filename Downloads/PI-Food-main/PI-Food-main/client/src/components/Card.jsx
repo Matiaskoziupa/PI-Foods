@@ -4,7 +4,7 @@ import React from "react";
 
 // import Detail from "./Detail";
 import { Link } from "react-router-dom";
-// import "./Card.css"
+import "./Card.css"
 
 export default function Card({name,image,type, diets}){
     return (

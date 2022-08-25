@@ -78,9 +78,9 @@ function rootReducer(state=initialState, action){
                                 const allRecipes = state.allRecipes;
                                 const filtByDiets = action.payload === 'all' ? 
                                 allRecipes :
-                                allRecipes.filter(recipe => {
+                                allRecipes ?.filter(recipe => {
                                     return recipe.diets?.find(diets =>  {
-                                        return diets.name === action.payload || diets === action.payload}) 
+                                        return diets.name === action.payload || diets===action.payload}) 
                                 })
                                 return {
                                     ...state,

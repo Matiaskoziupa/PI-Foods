@@ -1,0 +1,36 @@
+.searchInputCONT{
+    display: flex;
+    
+     
+   
+   }
+   .searchInput{
+     
+       font-size: 4px;
+       text-transform: uppercase;
+       border-radius: 6px;
+       border: 2px solid rgba(0, 0, 0, 0.676);
+       background-color: rgba(20, 4, 4, 0.412); 
+       box-shadow: 0 20px 40px +24px rgba(15, 1, 1, 0.25);
+       height: 50%;
+       width: 50%;
+       padding-left: 1rem;
+       margin-left: 1rem;
+   }
+   .btn2{
+    color:rgba(112, 132, 132, 0.698);
+    font-family: 'Press Start 2P';
+    border: 3px solid rgba(65, 26, 76, 0.797);
+    font-size: 12px;
+    text-transform: uppercase;
+    border-radius: 3px;
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: rgba(149, 34, 169, 0.299); 
+    border-radius: 8px;
+    border: 3px solid rgba(183, 174, 174, 0.2);
+    padding: 0.5rem;
+    
+    
+   }
