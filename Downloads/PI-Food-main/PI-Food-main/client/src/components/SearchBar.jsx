@@ -13,13 +13,15 @@ export default function SearchBar({setCurrentPage, setRecipesPerPages}){
     }
     function handleSubmit(e){
         e.preventDefault();
-        if(name.length!==0){
+        if(name.length!==0 ){
             dispatch(getNameRecipes(name.toLowerCase()))
+                
+                
         } else {
-            alert("Enter a word before searching...")
+            alert("You have to enter a word or your recipe dont exist")
         }
         setName("")
-        setCurrentPage(1)
+        setCurrentPage(1)   
         
     }
 
@@ -35,3 +37,59 @@ export default function SearchBar({setCurrentPage, setRecipesPerPages}){
     )
 
 }
+// import React, { useState } from 'react'
+// import { useDispatch } from 'react-redux'
+// import { getNameRecipes } from "../actions/index"
+// // import s from '../Search/Search.module.css'
+
+
+
+// const SearchBar = () => {
+
+  
+//     // const recipe= useSelector((state)=> state.recipe)
+//     const dispatch =  useDispatch()
+//     const [name,SetName]= useState("")
+   
+
+      
+
+//     const handleChange = (e)=>{
+//         e.preventDefault()
+//           SetName(e.target.value)
+        
+  
+//     }
+
+//     const handleSubmit = (e)=>{
+//         e.preventDefault()
+
+//           dispatch(getNameRecipes(name));
+//           SetName('');
+          
+//       }
+    
+   
+  
+
+
+//   return (
+//     <div onSubmit={handleSubmit}>
+   
+//       <form action="">
+//         <input type="text"
+//                 placeholder='Buscar Recetas.. '
+//                 value={name}
+//                 onChange={handleChange}
+//                 autoComplete='off'
+               
+//             />
+//             </form>
+         
+           
+//             <button onClick={handleSubmit} type="submit" value="">🍳</button>
+//     </div>
+//   )
+// }
+
+// export default SearchBar

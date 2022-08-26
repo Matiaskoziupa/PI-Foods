@@ -87,10 +87,12 @@ function rootReducer(state=initialState, action){
                                     recipes: filtByDiets
                                 };
                                 case GET_NAME_RECIPES:
+                                   
                                     return{
                                         ...state,
-                                        recipes:action.payload.error?[{Error:"No recipes Found"}] : action.payload,
+                                        recipes:action.payload.error?[{Error:"No recipes Found"}] : action.payload,  
                                     }
+
                                     case "POST_RECIPES":
                                         return{
                                             ...state,
@@ -110,6 +112,7 @@ function rootReducer(state=initialState, action){
                                                         ...state,
                                                         detail:[]
                                                     }
+                                                    
 
             default:
                 return{

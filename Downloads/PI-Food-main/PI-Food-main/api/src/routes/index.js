@@ -72,7 +72,7 @@ router.get("/recipes", async (req,res) =>{
             const filter= allRecipes.filter((s)=>
                 s.name.includes(name)
             );
-            filter.length ? res.send(filter) : res.send({msg:"Not found a recipe with this name"})
+            filter.length ? res.send(filter) : res.json({error:error.message})
         } else {
             return res.send(allRecipes)
         }

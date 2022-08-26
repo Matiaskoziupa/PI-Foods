@@ -9,6 +9,7 @@ export const GET_DIETS="GET_DIETS"
 export const GET_RECIPES_ID="GET_RECIPES_ID"
 export const GET_CLEAN="GET_CLEAN"
 
+
 export function getRecipes(){
     return async function(dispatch){
         let json= await axios.get("http://localhost:3001/recipes");
@@ -58,10 +59,10 @@ export function getOrderByName(payload){
         payload
     }
 }
-export function getNameRecipes(payload){
+export function getNameRecipes(name){
     return async function (dispatch){
         try{
-            var json= await axios.get(`http://localhost:3001/recipes?name=${payload}`)
+            var json= await axios.get(`http://localhost:3001/recipes?name=${name}`)
             return dispatch({
                 type:"GET_NAME_RECIPES",
                 payload:json.data

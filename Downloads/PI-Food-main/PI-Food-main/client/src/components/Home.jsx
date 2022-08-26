@@ -17,11 +17,13 @@ export default function Home(){
     const[recipesPerPage, setRecipesPerPage]=useState(9);
     const indexOfLastRecipe=currentPage*recipesPerPage;
     const indexOfFirstRecipe=indexOfLastRecipe-recipesPerPage;
-    const currentRecipes=allRecipes?.slice(indexOfFirstRecipe, indexOfLastRecipe)
+    const currentRecipes=allRecipes&&allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe)
+    console.log(currentRecipes)
 
     const paginado= (pageNumber)=> {
         setCurrentPage(pageNumber)
     }
+  
     
     useEffect(()=>{
         dispatch(getRecipes());
