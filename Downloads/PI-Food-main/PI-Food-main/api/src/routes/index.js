@@ -89,13 +89,13 @@ router.get("/recipe/:id", async (req, res)=>{
             if(filter.length){
                 res.send(filter)
             } else{
-                res.send({msg:"Not found a recipe with this ID"})
+                res.json({error:error.message})
             }
         } else {
-            res.send({msg:"Not found a recipe with this ID"})
+            res.json({error:error.message})
         }
     } catch(error){
-        res.status(404).send({ msg: "Should enter a valid ID" })
+        res.status(404).json({ error:error.message })
     }
 })
 router.post("/recipes", async (req, res)=>{

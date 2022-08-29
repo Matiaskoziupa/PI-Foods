@@ -26,13 +26,13 @@ export default function SearchBar({setCurrentPage, setRecipesPerPages}){
     }
 
     return(
-        <div className="searchInputCONT">
-            <input className="searchInput"
+        <div>
+            <input
             type="text"
             placeholder="Search..."
             onChange={(e)=>handleInputChange(e)}
             />
-            <button className="btn2" type="submit" onClick={(e)=>handleSubmit(e)}>Search</button>
+            <button  type="submit" onClick={(e)=>handleSubmit(e)}>Search</button>
         </div>
     )
 

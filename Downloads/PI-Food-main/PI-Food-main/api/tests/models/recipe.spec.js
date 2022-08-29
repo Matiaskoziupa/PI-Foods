@@ -20,3 +20,23 @@ describe('Recipe model', () => {
     });
   });
 });
+describe("Recipe model", () => {
+  before(() =>
+    conn.authenticate().catch((err) => {
+      console.error("Unable to connect to the database:", err);
+    })
+  );
+  describe("Validators", () => {
+    beforeEach(() => Recipe.sync({ force: true }));
+    describe("summary", () => {
+      it("should throw an error if summary is null", (done) => {
+        Recipe.create({})
+          .then(() => done(new Error("It requires a valid summary")))
+          .catch(() => done());
+      });
+      it("should work when its a valid summary", () => {
+        Recipe.create({ summary: "The summary of this recipe is a test" });
+      });
+    });
+  });
+});

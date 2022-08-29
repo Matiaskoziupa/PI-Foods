@@ -7,6 +7,7 @@ const { Recipe, conn } = require('../../src/db.js');
 const agent = session(app);
 const recipe = {
   name: 'Milanea a la napolitana',
+  summary: "The summary of this recipe is a test"
 };
 
 describe('Recipe routes', () => {
@@ -22,3 +23,9 @@ describe('Recipe routes', () => {
     );
   });
 });
+describe("GET /recipe/:id", ()=>{
+    it("Should get status 200 when obtaining the recipe detail", (done)=>{
+      agent.get("/recipe:id").expect(200);
+      done();
+    }).timeout(2000)
+  });
