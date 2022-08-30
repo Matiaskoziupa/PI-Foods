@@ -121,24 +121,7 @@ router.post("/recipes", async (req, res)=>{
     }
 })
 
-// async function getDiets(){  
-//     try { 
-//       const dietas = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${KEY}&addRecipeInformation=true&number=100`);
-//         // let dietas = respuesta;
-//       const types = await dietas.data.results.map((t) => t.diets);  
-//       const diets = types.flat();
-//       const typeDiets = [...new Set(diets),"vegetarian"]; 
-//       typeDiets.forEach(async (d) => {
-//         await Diet.findOrCreate({ 
-//           where: { name: d }, 
-//         });
-//       });
-//       const allDiets = await Diet.findAll();
-//       return allDiets;
-//     } catch (error) {
-//       console.log(error); 
-//     }
-//   };
+
 
 router.get("/diets", async (req, res)=>{
     try{
@@ -147,6 +130,20 @@ router.get("/diets", async (req, res)=>{
     } catch(err){
         res.send(err)
     }
+})
+
+router.delete("/recipe/:id", async (req, res)=>{
+    let {id}=req.params
+    await Recipe.destroy({
+    where: {
+     id: id
+    }
+   }).then(count => {
+    if (!count) {
+     return res.status(404).send({error: 'No user'});
+    }
+    res.status(204).send();
+   });
 })
 
 module.exports = router;

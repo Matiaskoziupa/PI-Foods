@@ -29,6 +29,7 @@ export default function Home(){
         dispatch(getRecipes());
     }, [dispatch])
 
+
     const [orden, setOrden]= useState("")
 
     function handleClick(e){
@@ -59,6 +60,7 @@ export default function Home(){
         setCurrentPage(1)
         setOrden(`Ordenado ${e.target.value}`)
     }
+   
     
 
 return(
@@ -104,6 +106,7 @@ return(
             recipesPerPage={recipesPerPage}
             allRecipes={allRecipes?.length}
             paginado={paginado}
+
             />
         </div>
         <div className="CONTAINER">

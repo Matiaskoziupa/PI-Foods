@@ -249,7 +249,7 @@ const Create = () => {
                         <option value={input.diets} name="type">Diet..</option>
                          {/* <option name="" value={input.autor}>Autor</option> */}
                         {
-                            diet?.map(c=> {
+                            diet&&diet.map(c=> {
                                 return(
                                  
                                     <option key={c.id} value={c.name}>{c.name}</option>

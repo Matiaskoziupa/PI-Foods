@@ -5,7 +5,7 @@ export default function LandingPage(){
     return(
     <div className='fondo'>
         <div className='flex'>
-        <h1 classname="box">Welcome to my page</h1>
+        <h1 className="box">Welcome to my page</h1>
         <Link  to="/home"><button className='box'>Ingresar</button></Link>
         </div>
     </div>

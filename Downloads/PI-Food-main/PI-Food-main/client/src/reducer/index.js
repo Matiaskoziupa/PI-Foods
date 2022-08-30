@@ -1,4 +1,4 @@
-import { GET_FILTER_CREATED, GET_RECIPES, GET_ORDER_BY_NAME, GET_ORDER_BY_SCORE, GET_FILTER_BY_DIETS, GET_NAME_RECIPES, GET_DIETS, GET_RECIPES_ID, GET_CLEAN } from "../actions";
+import { GET_FILTER_CREATED, GET_RECIPES, GET_ORDER_BY_NAME, GET_ORDER_BY_SCORE, GET_FILTER_BY_DIETS, GET_NAME_RECIPES, GET_DIETS, GET_RECIPES_ID } from "../actions";
 
 const initialState={
     recipes:[],
@@ -65,6 +65,7 @@ function rootReducer(state=initialState, action){
                                 ...state,
                                 recipes:sortedArr
                             }
+
                             case GET_FILTER_CREATED:
                                 const allRecipes2=state.allRecipes;
                                 const filter= action.payload==="created" ? allRecipes2?.filter(s=>s.createdInDb) : allRecipes2?.filter(s=>!s.createdInDb)
@@ -107,11 +108,7 @@ function rootReducer(state=initialState, action){
                                                     ...state,
                                                     detail: action.payload
                                                 }
-                                                case GET_CLEAN:
-                                                    return{
-                                                        ...state,
-                                                        detail:[]
-                                                    }
+                                               
                                                     
 
             default:
