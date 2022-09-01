@@ -4,14 +4,14 @@
     margin-top: 0.15rem;
     margin-bottom: -0.5%;
   display: inline-flex;
-  background-color: rgba(8, 1, 1, 0.388); 
+  background-color: rgba(248, 169, 96, 0.336); 
   
 }
 .btn{
     
     align-content: center;
     font-family: 'Press Start 2P';
-    border: 1px solid rgba(65, 26, 76, 0.797);
+    border: 1px solid rgba(0, 0, 0, 0.797);
     padding: 0.6rem;
     margin: 6px;
     font-size: 9px;
@@ -22,9 +22,9 @@
     font-weight: 600;
     cursor: pointer;
     background: transparent;
-    color:rgb(123, 110, 181);
+    color:rgb(0, 0, 0);
 }
     
     .btn:hover {
-      box-shadow: 0 20px 40px +24px rgba(133, 104, 104, 0.25);
+      box-shadow: 0 20px 40px +24px rgba(248, 169, 96, 0.336);
     }

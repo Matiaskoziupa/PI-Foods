@@ -3,14 +3,15 @@ import { useEffect, useState } from "react";
 import {Link, useHistory} from "react-router-dom";
 import { postRecipes, getDiets } from "../actions";
 import { useDispatch, useSelector } from "react-redux";
+import "./Create.css"
 
 
-const Create = () => {
+function Create(){
 
 
     // Validates 
     
-    const validate = () =>{
+    function validate(){
         let errors = {};
     
         if(input.name === ""){
@@ -140,16 +141,16 @@ const Create = () => {
         
     
       return (
-        <div >
-            <Link to="/home" >
+        <div className="formulario">
+            <Link to="/home" className="linkB" >
                 <span>back</span>        
             </Link>
     
-            <form action="" onSubmit={(e)=> handleSubmit (e)} >
+            <form action="" onSubmit={(e)=> handleSubmit (e)} className="fondoform" >
     
                     <label htmlFor="">URL Img</label>
                 <div>
-                        <input 
+                        <input className="inputt" 
                         type="text"
                         value={input.image}
                         name='image'
@@ -157,7 +158,7 @@ const Create = () => {
                         />
                         {
                             errors.image && (
-                                <p>{errors.image}</p>
+                                <p className="error">{errors.image}</p>
                             )
                         }
                         
@@ -165,7 +166,7 @@ const Create = () => {
     
                     <label htmlFor="">name</label>
                 <div>
-                        <input
+                        <input className="inputt"
                         type="text"
                         value={input.name}
                         name='name'
@@ -173,14 +174,14 @@ const Create = () => {
                         />
                         {
                             errors.name && (
-                                <p>{errors.name}</p>
+                                <p className="error">{errors.name}</p>
                             )
                         }
                 </div>
     
                     <label htmlFor="">summary</label>
                 <div>
-                        <input
+                        <input className="inputt"
                         type="text"
                         value={input.summary}
                         name="summary"
@@ -188,14 +189,14 @@ const Create = () => {
                         />
                         {
                             errors.summary && (
-                                <p>{errors.summary}</p>
+                                <p className="error">{errors.summary}</p>
                             )
                         }
                 </div>
     
                       <label htmlFor="">dishTypes</label>
                 <div>
-                        <input
+                        <input className="inputt"
                         type="text"
                         value={input.dishTypes}
                         name="dishTypes"
@@ -203,7 +204,7 @@ const Create = () => {
                         />
                          {
                             errors.dishTypes && (
-                                <p>{errors.dishTypes}</p>
+                                <p className="error">{errors.dishTypes}</p>
                             )
                         } 
                  </div> 
@@ -211,7 +212,7 @@ const Create = () => {
                     <label htmlFor="">HealthScore</label>
                 <div>
                    
-                        <input
+                        <input className="inputs"
                         type="number"
                         value={input.healthScore}
                         name="healthScore"
@@ -222,30 +223,30 @@ const Create = () => {
                         />
                           {
                             errors.healthScore && (
-                                <p>{errors.healthScore}</p>
+                                <p className="error">{errors.healthScore}</p>
                             )
                         }
                 </div>
     
                     <label htmlFor="">Step by Step</label>
                 <div>
-                    <textarea onChange={handleChange} type="text" name="steps" value={input.steps}>
+                    <textarea className="textar" onChange={handleChange} type="text" name="steps" value={input.steps}>
     
                     </textarea>
                         
                          {
                             errors.steps && (
-                                <p>{errors.steps}</p>
+                                <p className="error">{errors.steps}</p>
                             )
                         }
     
                 </div>
                 
     
-                <div>
+                <div className="op">
     
     
-                    <select  onChange={handleSelect}>
+                    <select className="selet"  onChange={handleSelect}>
                         <option value={input.diets} name="type">Diet..</option>
                          {/* <option name="" value={input.autor}>Autor</option> */}
                         {
@@ -263,7 +264,7 @@ const Create = () => {
                         
                         {
                             errors.diets && (
-                                <p>{errors.diets}</p>
+                                <p className="error">{errors.diets}</p>
                             )
                         }
                       
@@ -273,15 +274,15 @@ const Create = () => {
                         
                 
     
-               <button type='submit' onSubmit={handleSubmit}>Crear</button>
+               <button className="bto" type='submit' onSubmit={handleSubmit}>Crear</button>
                
             </form>
     
-            <div>
+            <div className="xx">
                 {input.diets.map((el) => (
-                <div key={el}>
+                <div key={el} className="a">
                 <span >{el}</span >
-                <button onClick={() => handleDelete(el)}> x </button>
+                <button className="bt" onClick={() => handleDelete(el)}> x </button>
                 </div>
             ))}
             </div>

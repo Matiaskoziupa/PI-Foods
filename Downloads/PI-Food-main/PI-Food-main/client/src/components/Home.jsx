@@ -65,7 +65,7 @@ export default function Home(){
 
 return(
 
-    <div className="options1">
+    <div>
         <Link to="/recipes"><button className="btn2">Create recipe</button></Link>
         <div >
             <h1 className="titles">Foods</h1>
@@ -73,7 +73,7 @@ return(
             setCurrentPage={setCurrentPage}
             setRecipesPerPage={setRecipesPerPage}
             />
-            <div className="options1">
+            <div>
                 <button className="btn2reload" onClick={(e)=>handleClick(e)}>Reload all recipes</button>
                 <select className="select" onChange={(e)=>handleFilterCreated(e)}>
                     <option value="All">Sort created-all</option>

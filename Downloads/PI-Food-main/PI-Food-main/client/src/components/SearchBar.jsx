@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getNameRecipes } from "../actions";
+import "./SearchBar.css"
 
 export default function SearchBar({setCurrentPage, setRecipesPerPages}){
     const dispatch=useDispatch()
@@ -26,70 +27,14 @@ export default function SearchBar({setCurrentPage, setRecipesPerPages}){
     }
 
     return(
-        <div>
+        <div className="searchInput">
             <input
             type="text"
             placeholder="Search..."
             onChange={(e)=>handleInputChange(e)}
             />
-            <button  type="submit" onClick={(e)=>handleSubmit(e)}>Search</button>
+            <button className="btn2" type="submit" onClick={(e)=>handleSubmit(e)}>Search</button>
         </div>
     )
 
 }
-// import React, { useState } from 'react'
-// import { useDispatch } from 'react-redux'
-// import { getNameRecipes } from "../actions/index"
-// // import s from '../Search/Search.module.css'
-
-
-
-// const SearchBar = () => {
-
-  
-//     // const recipe= useSelector((state)=> state.recipe)
-//     const dispatch =  useDispatch()
-//     const [name,SetName]= useState("")
-   
-
-      
-
-//     const handleChange = (e)=>{
-//         e.preventDefault()
-//           SetName(e.target.value)
-        
-  
-//     }
-
-//     const handleSubmit = (e)=>{
-//         e.preventDefault()
-
-//           dispatch(getNameRecipes(name));
-//           SetName('');
-          
-//       }
-    
-   
-  
-
-
-//   return (
-//     <div onSubmit={handleSubmit}>
-   
-//       <form action="">
-//         <input type="text"
-//                 placeholder='Buscar Recetas.. '
-//                 value={name}
-//                 onChange={handleChange}
-//                 autoComplete='off'
-               
-//             />
-//             </form>
-         
-           
-//             <button onClick={handleSubmit} type="submit" value="">🍳</button>
-//     </div>
-//   )
-// }
-
-// export default SearchBar
