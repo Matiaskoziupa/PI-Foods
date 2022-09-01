@@ -132,19 +132,7 @@ router.get("/diets", async (req, res)=>{
     }
 })
 
-router.delete("/recipe/:id", async (req, res)=>{
-    let {id}=req.params
-    await Recipe.destroy({
-    where: {
-     id: id
-    }
-   }).then(count => {
-    if (!count) {
-     return res.status(404).send({error: 'No user'});
-    }
-    res.status(204).send();
-   });
-})
+
 
 module.exports = router;
 
