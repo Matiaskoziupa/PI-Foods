@@ -7,6 +7,8 @@ export const GET_FILTER_BY_DIETS="GET_FILTER_BY_DIETS"
 export const GET_NAME_RECIPES="GET_NAME_RECIPES"
 export const GET_DIETS="GET_DIETS"
 export const GET_RECIPES_ID="GET_RECIPES_ID"
+export const GET_CLEAN="GET_CLEAN"
+
 
 
 export function getRecipes(){
@@ -83,6 +85,12 @@ export function getRecipesId(id){
         } catch(error){
             console.log(error)
         } 
+    }
+}
+export function getClean(payload){
+    return {
+        type:"GET_CLEAN",
+        payload
     }
 }
 

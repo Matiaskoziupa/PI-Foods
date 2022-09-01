@@ -8,7 +8,7 @@ import "./Card.css"
 
 export default function Card({name,image, diets}){
     return (
-        <fragment>
+        <div>
         <div className="card"> 
             <div className="card_items">
                 <h3 className="name">{name}</h3>
@@ -17,6 +17,6 @@ export default function Card({name,image, diets}){
                 
             </div> 
         </div>   
-        </fragment>   
+        </div>   
     )
 }

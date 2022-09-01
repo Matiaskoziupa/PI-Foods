@@ -1,10 +1,10 @@
-import { GET_FILTER_CREATED, GET_RECIPES, GET_ORDER_BY_NAME, GET_ORDER_BY_SCORE, GET_FILTER_BY_DIETS, GET_NAME_RECIPES, GET_DIETS, GET_RECIPES_ID } from "../actions";
+import { GET_FILTER_CREATED, GET_RECIPES, GET_ORDER_BY_NAME, GET_ORDER_BY_SCORE, GET_FILTER_BY_DIETS, GET_NAME_RECIPES, GET_DIETS, GET_RECIPES_ID, GET_CLEAN } from "../actions";
 
 const initialState={
     recipes:[],
     allRecipes:[],
     diets:[],
-    detail:[]
+    detail:[],
 }
 
 function rootReducer(state=initialState, action){
@@ -108,6 +108,12 @@ function rootReducer(state=initialState, action){
                                                     ...state,
                                                     detail: action.payload
                                                 }
+                                                case GET_CLEAN:
+                                                    return{
+                                                        ...state,
+                                                        detail:[]
+                                                    }
+                                               
                                                
                                                     
 

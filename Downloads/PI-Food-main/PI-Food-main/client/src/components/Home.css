@@ -1,10 +1,15 @@
-.titles{ padding-top: 0;
+.all{
+  background: url(https://www.netcostmarket.com/wp-content/uploads/2019/10/food-background-1-e1609268192287.jpg);
+}
+.titles{
+   padding-top: 0;
     color:rgb(31, 29, 27);
     font-size:35px;
     font-family: cursive 
 }
 
 .options1{
+  
     /* cursor: pointer; */
     background-color: rgba(8, 1, 1, 0.64); 
     /* gap:1rem; */
@@ -27,6 +32,7 @@ width: 20%;
 
 }
 .btn2{
+  
     color:rgba(112, 132, 132, 0.698);
     font-family: 'Press Start 2P';
     border: 3px solid rgba(248, 169, 96, 0.336);
@@ -67,6 +73,7 @@ width: 20%;
     background-color: rgba(252, 145, 46, 0.336);
   }
   .CONTAINER{
+    
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;

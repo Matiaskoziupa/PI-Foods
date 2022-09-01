@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Create.css"
 
 
-function Create(){
+export default function Create(){
 
 
     // Validates 
@@ -36,7 +36,7 @@ function Create(){
             errors.diets = "it has to be a different diet"
     
         }else if(!input.healthScore){
-            errors.healthyScore ="required field"
+            errors.healthScore ="required field"
         }else if (!input.image.includes("https")) {
             errors.image = 'Please insert an image type URL'
         }else if(!input.steps){
@@ -290,4 +290,4 @@ function Create(){
         </div>
       )
     }
-    export default Create;
+    

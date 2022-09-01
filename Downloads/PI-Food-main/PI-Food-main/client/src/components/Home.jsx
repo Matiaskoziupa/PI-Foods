@@ -7,11 +7,12 @@ import Card from "./Card";
 import Paginado from "./Paginated";
 import SearchBar from "./SearchBar";
 import "./Home.css";
+import "./Loading.css";
 
 export default function Home(){
     const dispatch=useDispatch();
     const allRecipes=useSelector((state)=>state.recipes)
-    let [loading,setLoading]= useState(true);
+    // let [loading,setLoading]= useState(true);
     console.log(allRecipes)
     const[currentPage, setCurrentPage]=useState(1);
     const[recipesPerPage, setRecipesPerPage]=useState(9);
@@ -19,7 +20,7 @@ export default function Home(){
     const indexOfFirstRecipe=indexOfLastRecipe-recipesPerPage;
     const currentRecipes=allRecipes&&allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe)
     console.log(currentRecipes)
-
+    
     const paginado= (pageNumber)=> {
         setCurrentPage(pageNumber)
     }
@@ -28,8 +29,7 @@ export default function Home(){
     useEffect(()=>{
         dispatch(getRecipes());
     }, [dispatch])
-
-
+    
     const [orden, setOrden]= useState("")
 
     function handleClick(e){
@@ -67,7 +67,7 @@ return(
 
     <div>
         <Link to="/recipes"><button className="btn2">Create recipe</button></Link>
-        <div >
+        <div>
             <h1 className="titles">Foods</h1>
             <SearchBar
             setCurrentPage={setCurrentPage}
@@ -101,7 +101,7 @@ return(
                     <option value="ketogenic">Ketogenic</option>
                     <option value="fodmap friendly">Fodmap friendly</option>
                 </select>
-            </div>
+            </div> 
             <Paginado
             recipesPerPage={recipesPerPage}
             allRecipes={allRecipes?.length}
@@ -117,9 +117,9 @@ return(
                             <Card name={s.name} image={s.image} diets={!s.createdInDb? s.diets : s.diets?.map(s =>s.name)}/>
                         </Link>
                     
-                );
+                ) ;
             })}
-            </div>
-    </div>
-)
+            </div> 
+    </div> 
+) 
 }
